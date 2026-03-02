@@ -7,6 +7,8 @@ Clone the repo: git clone <your-repo-url>
 
 Install dependencies: npm install
 
+Setup Supabase database using schema provided in supabase folder and recreate database by importing csv found in the data folder.
+
 Create a .env.local file: you must create this file in the root folder.
 
 Fill in the Keys: you will need to provide your own keys for:
