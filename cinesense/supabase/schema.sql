@@ -13,3 +13,5 @@ create table public."Movies" (
   "Director" text null,
   constraint movies_pkey primary key (id)
 ) TABLESPACE pg_default;
+
+create index IF not exists idx_movies_title on public."Movies" using btree ("Title") TABLESPACE pg_default;

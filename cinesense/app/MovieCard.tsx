@@ -99,12 +99,21 @@ export default function MovieCard({ movie }: { movie: any }) {
 
       {/* CONTENT SECTION */}
       <div className="p-3 flex flex-col flex-grow">
-        <h2 className="font-bold text-[13px] leading-tight truncate text-slate-100 group-hover:text-cyan-400 transition-colors">
-          {movie.Title}
-        </h2>
-        <p className="text-[9px] text-slate-500 mt-0.5 uppercase tracking-wider">
-          {movie.ReleaseYear} • {movie.Runtime}m
-        </p>
+  <h2 className="font-bold text-[13px] leading-tight truncate text-slate-100 group-hover:text-cyan-400 transition-colors">
+    {movie.Title}
+  </h2>
+  
+  {/* ROW: Year, Runtime, and Cast */}
+  <div className="flex items-center gap-1.5 mt-1">
+    <p className="text-[9px] text-slate-500 font-bold tracking-wider shrink-0">
+      {movie.ReleaseYear} • {movie.Runtime}m
+    </p>
+    
+    {/* The Cast List: We use 'truncate' to keep it to one line */}
+    <p className="text-[9px] text-slate-400/80 truncate italic border-l border-slate-700 pl-1.5">
+      {movie.Cast || "Cast unknown"}
+    </p>
+  </div>
 
         <button 
           onClick={getAiVerdict}
