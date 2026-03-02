@@ -1,3 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Since you don't have a 'src' folder, we tell Tailwind 
+  v4 to look specifically at your root app directory.
+*/
+@source "cinesense/app/**/*.{ts,tsx}";
+@source "cinesense/lib/**/*.{ts,tsx}";
+
+@theme {
+  /* This is where you'd put custom colors or fonts in v4 */
+  --color-brand-blue: #60a5fa;
+  --color-brand-dark: #0f172a;
+}
