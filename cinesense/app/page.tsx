@@ -30,10 +30,16 @@ export default async function Home({
     dbQuery = dbQuery.ilike('Title', `%${query}%`);
   }
   
-  if (genre) {
-    // Note: Use .contains('Genre', [genre]) if your column is a Postgres Array
-    dbQuery = dbQuery.ilike('Genre', `%${genre}%`);
-  }
+if (genre) {
+  // We use ilike to find the genre even if it's buried between other pipes
+  // Example: %Horror% will find "|Horror|" or "Action|Horror"
+  dbQuery = dbQuery.ilike('Genre', `%${genre}%`);
+}
+
+// 3. Fetch the dynamic genre list
+// Ensure this also points to the updated SQL function
+const { data: genreData } = await supabase.rpc('get_unique_genres');
+const genres = genreData?.map((g: any) => g.genre_name) || [];
 
   if (minRating) {
     dbQuery = dbQuery.gte('TMDBRating', parseFloat(minRating));
@@ -64,7 +70,7 @@ export default async function Home({
         <p className="text-slate-400 mb-8 font-medium italic">Intelligent cinematic discovery.</p>
         
         <SearchBar />
-        <Filters />
+        <Filters genres={genres} />
 
         {/* Clear All Results button */}
         {(query || genre || minRating || castSearch) && (

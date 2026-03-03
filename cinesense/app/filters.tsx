@@ -2,7 +2,12 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function Filters() {
+// Define the type for the props we're passing in
+interface FiltersProps {
+  genres: string[];
+}
+
+export default function Filters({ genres }: FiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -16,24 +21,27 @@ export default function Filters() {
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-4 mb-10 p-4 bg-slate-800/20 backdrop-blur-md rounded-2xl border border-slate-700/50">
-      {/* Genre Filter */}
+      
+      {/* Genre Filter - Now Dynamic! */}
       <select 
         onChange={(e) => updateFilter('g', e.target.value)}
         value={searchParams.get('g') || ''}
-        className="bg-slate-900 border border-slate-700 text-xs text-cyan-400 rounded-lg px-3 py-2 outline-none focus:border-cyan-500 transition-all"
+        className="bg-slate-900 border border-slate-700 text-xs text-cyan-400 rounded-lg px-3 py-2 outline-none focus:border-cyan-500 transition-all cursor-pointer"
       >
         <option value="">All Genres</option>
-        <option value="Action">Action</option>
-        <option value="Horror">Horror</option>
-        <option value="Sci-Fi">Sci-Fi</option>
-        <option value="Drama">Drama</option>
+        {/* We map over the genres array passed from page.tsx */}
+        {genres.map((genre) => (
+          <option key={genre} value={genre}>
+            {genre}
+          </option>
+        ))}
       </select>
 
       {/* Minimum Rating Filter */}
       <select 
         onChange={(e) => updateFilter('r', e.target.value)}
         value={searchParams.get('r') || ''}
-        className="bg-slate-900 border border-slate-700 text-xs text-cyan-400 rounded-lg px-3 py-2 outline-none focus:border-cyan-500 transition-all"
+        className="bg-slate-900 border border-slate-700 text-xs text-cyan-400 rounded-lg px-3 py-2 outline-none focus:border-cyan-500 transition-all cursor-pointer"
       >
         <option value="">Min Rating</option>
         <option value="8">8+ Stars</option>

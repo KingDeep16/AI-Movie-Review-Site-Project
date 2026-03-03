@@ -1,5 +1,51 @@
-# AI-Movie-Review-Site-Project
-A full-stack movie discovery platform featuring AI-driven sentiment analysis, automated spoiler detection, and semantic mood-based search. Built with Next.js, Supabase, and Gemini 2.5.
+#🎬CineSense AI – Intelligent Cinematic Discovery
+CineSense AI is a full-stack movie discovery platform that leverages LLMs to provide instant, witty critical analysis. Built with a focus on high-performance data fetching, dynamic filtering, and a seamless AI user experience.
+
+🚀 Tech Stack
+Frontend: Next.js 15 (App Router), Tailwind CSS, TypeScript.
+
+Backend: Supabase (PostgreSQL), Next.js API Routes.
+
+AI Engine: Google Gemini 2.5 Flash.
+
+Data: TMDB API (Poster Proxying), Custom Movies Dataset.
+
+✨ Key Features
+AI Critic Integration: Real-time generation of movie "verdicts" using Gemini 2.5 with a custom typewriter UI effect.
+
+Complex Filtering: Server-side filtering by Genre, Cast, and Minimum Rating using URL search parameters for bookmarkable states.
+
+Dynamic Data Fetching: Custom SQL functions to unnest and aggregate pipe-separated (|) genre data from a relational database.
+
+Secure API Proxying: Server-side image fetching and AI calls to protect sensitive API keys from the client-side.
+
+🛠️ Engineering Challenges & Solutions
+1. Handling Non-Standard Data Structures
+Challenge: The movie dataset utilized a pipe-separated string format for genres (Action|Sci-Fi), making standard SQL filtering inefficient.
+Solution: Developed a PostgreSQL function (get_unique_genres) using unnest and string_to_array to dynamically generate a clean, unique genre list for the UI directly from the database.
+
+2. Synchronizing Frontend & Database Schema
+Challenge: Faced a mismatch between frontend property names and a case-sensitive legacy database schema (e.g., Genre vs Genres).
+Solution: Refactored the data access layer in Next.js 15 to align with strict PostgreSQL naming conventions and implemented a robust "No Results" state to handle edge cases.
+
+4. UI/UX: The "AI Lobby" Problem
+Challenge: AI responses can take 1-2 seconds, which can feel like "lag" to a user.
+Solution: Implemented a custom typewriter effect and loading states that provide immediate visual feedback, making the AI feel like it's "thinking" in real-time rather than just loading data.
+
+📁 Database Schema
+The project uses a structured PostgreSQL table (Movies) with the following core fields:
+
+Title (text)
+
+Genre (text, pipe-separated: Action|Adventure)
+
+TMDBRating (float8)
+
+Runtime (int4)
+
+Cast (text)
+
+Description (text)
 
 Setup steps:
 
