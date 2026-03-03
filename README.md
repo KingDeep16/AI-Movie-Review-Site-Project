@@ -15,7 +15,7 @@ AI Critic Integration: Real-time generation of movie "verdicts" using Gemini 2.5
 
 Complex Filtering: Server-side filtering by Genre, Cast, and Minimum Rating using URL search parameters for bookmarkable states.
 
-Dynamic Data Fetching: Custom SQL functions to unnest and aggregate pipe-separated (|) genre data from a relational database.
+Dynamic Data Fetching: Custom SQL functions to unnest and aggregate pipe-separated (|) genre data from a database.
 
 Secure API Proxying: Server-side image fetching and AI calls to protect sensitive API keys from the client-side.
 
